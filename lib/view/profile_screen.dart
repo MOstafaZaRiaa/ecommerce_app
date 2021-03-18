@@ -17,7 +17,7 @@ class ProfileScreen extends StatelessWidget {
               child: Text('logout'),
               onPressed: () {
                 controller.signOutOffAll();
-                Get.offAll(
+                Get.offAll(()=>
                   LoginScreen(),
                 );
               },
