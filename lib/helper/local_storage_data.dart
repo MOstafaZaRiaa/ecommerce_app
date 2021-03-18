@@ -6,33 +6,38 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../constance.dart';
 import 'package:ecommerce_app/model/user_model.dart';
 
-
-class LocalStorageData extends GetxController{
-
-  Future<UserModel> get getUser async{
-    try{
+class LocalStorageData extends GetxController {
+  Future<UserModel> get getUser async {
+    try {
       UserModel userModel = getUserData();
-      if(userModel ==null ){
-        return null ;
-      }else{
+      if (userModel == null) {
+        return null;
+      } else {
         return userModel;
       }
-    }catch (error){
+    } catch (error) {
       print(error.toString());
     }
   }
-  getUserData() async{
+
+  getUserData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var data = prefs.getString(CACHED_USER_DATA);
     return UserModel.fromJson(jsonDecode(data));
   }
-  setUser(UserModel userModel)async{
+
+  setUser(UserModel userModel) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString(CACHED_USER_DATA, userModel.toJson(),);
+    prefs.setString(
+      CACHED_USER_DATA,
+      json.decode(
+        userModel.toJson(),
+      ),
+    );
   }
-  deleteUser()async{
+
+  deleteUser() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.clear();
   }
-
 }
