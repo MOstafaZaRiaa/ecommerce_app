@@ -44,9 +44,7 @@ class HomeViewModel extends GetxController {
             document.data(),
           ),
         );
-        print(_products.length);
       });
-
       update();
       _isLoading.value = false;
     });

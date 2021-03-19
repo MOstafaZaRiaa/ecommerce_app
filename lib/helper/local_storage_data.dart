@@ -9,7 +9,7 @@ import 'package:ecommerce_app/model/user_model.dart';
 class LocalStorageData extends GetxController {
   Future<UserModel> get getUser async {
     try {
-      UserModel userModel = getUserData();
+      UserModel userModel = await getUserData();
       if (userModel == null) {
         return null;
       } else {
@@ -30,7 +30,7 @@ class LocalStorageData extends GetxController {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString(
       CACHED_USER_DATA,
-      json.decode(
+      json.encode(
         userModel.toJson(),
       ),
     );

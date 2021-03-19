@@ -19,62 +19,66 @@ class HomePage extends StatelessWidget {
           return HomeViewModel().getProducts();
         },
         child: Scaffold(
-          body: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.only(
-                top: 30.0,
-                left: 10,
-                right: 10,
-              ),
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 20,
-                  ),
-                  _searchTextFormField(),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  CustomText(
-                    text: 'Categories',
-                    color: Colors.black,
-                    fontSize: 18.0,
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  _categoriesListView(),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      CustomText(
-                        text: 'Best Selling',
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      InkWell(
-                        onTap: () {
-                          //TODO:see all button
-                          controller.getCategory();
-                        },
-                        child: CustomText(
-                          text: 'See all',
-                          fontSize: 16.0,
+          body: controller.isLoading.value
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      top: 30.0,
+                      left: 10,
+                      right: 10,
+                    ),
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 20,
                         ),
-                      ),
-                    ],
+                        _searchTextFormField(),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        CustomText(
+                          text: 'Categories',
+                          color: Colors.black,
+                          fontSize: 18.0,
+                        ),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        _categoriesListView(),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            CustomText(
+                              text: 'Best Selling',
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                //TODO:see all button
+                                controller.getCategory();
+                              },
+                              child: CustomText(
+                                text: 'See all',
+                                fontSize: 16.0,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        _productsListView(),
+                      ],
+                    ),
                   ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  _productsListView(),
-                ],
-              ),
-            ),
-          ),
+                ),
         ),
       ),
     );
@@ -82,44 +86,40 @@ class HomePage extends StatelessWidget {
 
   Widget _categoriesListView() {
     return GetBuilder<HomeViewModel>(
-      builder: (controller) => controller.isLoading.value
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
-          : Container(
-              height: 100,
-              child: ListView.separated(
-                scrollDirection: Axis.horizontal,
-                itemCount: controller.categories.length,
-                separatorBuilder: (BuildContext context, int index) => SizedBox(
-                  width: 18,
+      builder: (controller) => Container(
+        height: 100,
+        child: ListView.separated(
+          scrollDirection: Axis.horizontal,
+          itemCount: controller.categories.length,
+          separatorBuilder: (BuildContext context, int index) => SizedBox(
+            width: 18,
+          ),
+          itemBuilder: (context, index) {
+            return Column(
+              children: [
+                Container(
+                  height: 60,
+                  width: MediaQuery.of(context).size.width / 6.3,
+                  decoration: BoxDecoration(
+                      color: Colors.grey.shade100,
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image(
+                      image: FirebaseImage(
+                        controller.categories[index].image,
+                      ),
+                    ),
+                  ),
                 ),
-                itemBuilder: (context, index) {
-                  return Column(
-                    children: [
-                      Container(
-                        height: 60,
-                        width: MediaQuery.of(context).size.width / 6.3,
-                        decoration: BoxDecoration(
-                            color: Colors.grey.shade100,
-                            borderRadius: BorderRadius.circular(10)),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Image(
-                            image: FirebaseImage(
-                              controller.categories[index].image,
-                            ),
-                          ),
-                        ),
-                      ),
-                      CustomText(
-                        text: controller.categories[index].name,
-                      ),
-                    ],
-                  );
-                },
-              ),
-            ),
+                CustomText(
+                  text: controller.categories[index].name,
+                ),
+              ],
+            );
+          },
+        ),
+      ),
     );
   }
 

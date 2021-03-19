@@ -64,10 +64,10 @@ class AuthViewModel extends GetxController {
       await _auth
           .signInWithCredential(facebookCredential)
           .then((userCredential) async {
-        saveUser(userCredential);
+       await saveUser(userCredential);
       });
     }
-    Get.offAll(ControlViewModel());
+    Get.offAll(()=>ControlViewModel());
   }
 
   void signInWithEmailAndPassword() async {
@@ -82,7 +82,7 @@ class AuthViewModel extends GetxController {
               setUser(UserModel.fromJson(value.data(),),);
         });
       });
-      Get.offAll(ControlViewModel());
+      Get.offAll(()=>ControlViewModel(),);
     } on FirebaseException catch (error) {
       Get.snackbar(
         'Login error',
@@ -112,7 +112,7 @@ class AuthViewModel extends GetxController {
         );
         // saveUser(userCredential);
       });
-      Get.offAll(ControlViewModel());
+      Get.offAll(()=>ControlViewModel(),);
     } on FirebaseException catch (error) {
       Get.snackbar(
         'SignUp Error',
@@ -133,8 +133,10 @@ class AuthViewModel extends GetxController {
     );
     await FireStoreUser().addUserToFireStore(
       userModel,
-    );
-    setUser(userModel);
+    ).then((value) => {
+       setUser(userModel)
+    });
+    // setUser(userModel);
   }
 
   setUser(UserModel userModel) async {
