@@ -41,6 +41,7 @@ dependencies:
   path:
   shared_preferences:
   flutter_svg:
+  status_change:
 
 flutter_native_splash:
   color: "#42a5f5"
