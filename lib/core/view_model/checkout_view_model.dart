@@ -33,5 +33,4 @@ class CheckOutViewModel extends GetxController{
       return todoColor;
     }
   }
-
 }

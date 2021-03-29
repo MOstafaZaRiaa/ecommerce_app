@@ -1,3 +1,5 @@
+import 'package:ecommerce_app/view/widgets/custom_button.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:status_change/status_change.dart';
@@ -15,6 +17,7 @@ class CheckoutView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<CheckOutViewModel>(
+      init: CheckOutViewModel(),
       builder: (controller) => Scaffold(
         appBar: AppBar(
           centerTitle: true,
@@ -109,15 +112,23 @@ class CheckoutView extends StatelessWidget {
                 ? DeliveryTime()
                 : controller.pages == Pages.AddAddress
                     ? AddAddress()
-                    : Summary()
+                    : Summary(),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: Container(
+                width: 200,
+                height: 100,
+                padding: EdgeInsets.all(20),
+                child: CustomButton(
+                  text: 'Next',
+                  onPressed: (){
+                    controller.changeIndex(controller.index +1);
+
+                  },
+                ),
+              ),
+            ),
           ],
-        ),
-        floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.skip_next),
-          onPressed: () {
-            controller.changeIndex(controller.index +1);
-          },
-          backgroundColor: inProgressColor,
         ),
       ),
     );
