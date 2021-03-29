@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/view/checkout/checkout_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -15,16 +16,23 @@ class CartScreen extends StatelessWidget {
     return GetBuilder<CartViewModel>(
       init: CartViewModel(),
       builder: (controller) => controller.cartProductModel.length == 0
-          ? Center(child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                SvgPicture.asset('assets/images/empty_cart.svg',),
-                CustomText(text: 'Cart empty!',fontSize: 32.0,alignment: Alignment.center,),
-              ],
-            ),
-          ))
+          ? Center(
+              child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  SvgPicture.asset(
+                    'assets/images/empty_cart.svg',
+                  ),
+                  CustomText(
+                    text: 'Cart empty!',
+                    fontSize: 32.0,
+                    alignment: Alignment.center,
+                  ),
+                ],
+              ),
+            ))
           : Scaffold(
               body: Column(
                 children: [
@@ -167,7 +175,14 @@ class CartScreen extends StatelessWidget {
                           width: MediaQuery.of(context).size.width * 0.35,
                           child: CustomButton(
                             text: 'ADD',
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => CheckoutView(),
+                                ),
+                              );
+                            },
                           ),
                         )
                       ],
