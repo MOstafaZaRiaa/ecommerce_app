@@ -113,25 +113,29 @@ class CheckoutView extends StatelessWidget {
                 : controller.pages == Pages.AddAddress
                     ? AddAddress()
                     : Summary(),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  if(!(controller.pages == Pages.DeliveryTime)&&!(controller.index==0))
-                  Container(
-                    width: 150,
-                    height: 60,
-                    decoration: BoxDecoration(border: Border.all(width: 1,color: primaryColor)),
-                    margin: EdgeInsets.all(20),
-                    child: TextButton(
-                      child: Text('Back',style: TextStyle(color: Colors.black),),
-                      onPressed: () {
-                        controller.changeIndex(controller.index - 1);
-                      },
-                    ),
-                  ),
-                  Container(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                controller.index == 0
+                    ? Container()
+                    : Container(
+                        width: 150,
+                        height: 60,
+                        decoration: BoxDecoration(
+                            border: Border.all(width: 1, color: primaryColor)),
+                        margin: EdgeInsets.all(20),
+                        child: CustomButton(
+                          text: 'Back',
+                          color: Colors.white,
+                          textColor: primaryColor,
+                          onPressed: () {
+                            controller.changeIndex(controller.index - 1);
+                          },
+                        ),
+                      ),
+                Align(
+                  alignment: Alignment.bottomRight,
+                  child: Container(
                     width: 180,
                     height: 100,
                     padding: EdgeInsets.all(20),
@@ -142,8 +146,8 @@ class CheckoutView extends StatelessWidget {
                       },
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ],
         ),

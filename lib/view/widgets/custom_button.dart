@@ -5,26 +5,30 @@ import 'package:ecommerce_app/view/widgets/custom_text.dart';
 
 class CustomButton extends StatelessWidget {
   final  text;
+  final Color color;
+  final Color textColor;
   final Function onPressed;
 
   const CustomButton({
     this.text,
     this.onPressed,
+    this.textColor = Colors.white,
+    this.color = primaryColor,
   });
 
   @override
   Widget build(BuildContext context) {
     return FlatButton(
       onPressed: onPressed,
-      color: primaryColor,
-      shape: RoundedRectangleBorder(
+      color: color,
+      shape:  RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(6),
       ),
-      padding: EdgeInsets.all(18),
+      padding:const EdgeInsets.all(18),
       child: CustomText(
         text: text,
         alignment: Alignment.center,
-        color: Colors.white,
+        color: textColor,
       ),
     );
   }

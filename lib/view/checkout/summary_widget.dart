@@ -1,6 +1,8 @@
+import 'package:ecommerce_app/core/view_model/checkout_view_model.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:firebase_image/firebase_image.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../constance.dart';
@@ -13,14 +15,18 @@ class Summary extends StatelessWidget {
     return Expanded(
       child: Column(
         children: [
-          SizedBox(height: 40,),
+          SizedBox(
+            height: 40,
+          ),
           GetBuilder<CartViewModel>(
             builder: (controller) => Container(
               height: 250,
               child: Padding(
-                padding: EdgeInsets.all(20,),
+                padding: EdgeInsets.all(
+                  20,
+                ),
                 child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
+                    scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) => Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -62,6 +68,37 @@ class Summary extends StatelessWidget {
               ),
             ),
           ),
+          Divider(),
+          GetBuilder<CheckOutViewModel>(
+            builder: (controller) => Padding(
+              padding: const EdgeInsets.all(
+                10,
+              ),
+              child: Column(
+                children: [
+                  CustomText(
+                    text: 'Shipping Address',
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  CustomText(
+                    text: controller.street1 +
+                        ',' +
+                        controller.street2 +
+                        ',' +
+                        controller.city +
+                        ',' +
+                        controller.state +
+                        ',' +
+                        controller.country,
+                    color: Colors.grey,
+                    fontSize: 16.0,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Divider(),
         ],
       ),
     );
