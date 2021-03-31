@@ -13,7 +13,6 @@ import 'package:ecommerce_app/core/view_model/checkout_view_model.dart';
 import 'package:ecommerce_app/helper/enum.dart';
 
 class CheckoutView extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<CheckOutViewModel>(
@@ -38,7 +37,8 @@ class CheckoutView extends StatelessWidget {
               child: StatusChange.tileBuilder(
                 theme: StatusChangeThemeData(
                   direction: Axis.horizontal,
-                  connectorTheme: ConnectorThemeData(space: 1.0, thickness: 1.0),
+                  connectorTheme:
+                      ConnectorThemeData(space: 1.0, thickness: 1.0),
                 ),
                 builder: StatusChangeTileBuilder.connected(
                   itemWidth: (_) =>
@@ -114,18 +114,35 @@ class CheckoutView extends StatelessWidget {
                     ? AddAddress()
                     : Summary(),
             Align(
-              alignment: Alignment.bottomRight,
-              child: Container(
-                width: 200,
-                height: 100,
-                padding: EdgeInsets.all(20),
-                child: CustomButton(
-                  text: 'Next',
-                  onPressed: (){
-                    controller.changeIndex(controller.index +1);
-
-                  },
-                ),
+              alignment: Alignment.bottomCenter,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  if(!(controller.pages == Pages.DeliveryTime)&&!(controller.index==0))
+                  Container(
+                    width: 150,
+                    height: 60,
+                    decoration: BoxDecoration(border: Border.all(width: 1,color: primaryColor)),
+                    margin: EdgeInsets.all(20),
+                    child: TextButton(
+                      child: Text('Back',style: TextStyle(color: Colors.black),),
+                      onPressed: () {
+                        controller.changeIndex(controller.index - 1);
+                      },
+                    ),
+                  ),
+                  Container(
+                    width: 180,
+                    height: 100,
+                    padding: EdgeInsets.all(20),
+                    child: CustomButton(
+                      text: 'Next',
+                      onPressed: () {
+                        controller.changeIndex(controller.index + 1);
+                      },
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
