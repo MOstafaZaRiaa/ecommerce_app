@@ -13,7 +13,7 @@ import 'package:ecommerce_app/view/widgets/custom_text.dart';
 
 class ProductDetailScreen extends StatelessWidget {
   @override
-  final ProductModel model;
+  final ProductModel? model;
 
   const ProductDetailScreen({
     this.model,
@@ -30,7 +30,7 @@ class ProductDetailScreen extends StatelessWidget {
                   width: double.infinity,
                   height: MediaQuery.of(context).size.height * 0.3,
                   child: Image(
-                    image: FirebaseImage(model.image),
+                    image: FirebaseImage(model!.image!),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -57,7 +57,7 @@ class ProductDetailScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       CustomText(
-                        text: model.name,
+                        text: model!.name,
                         fontSize: 26.0,
                         fontWeight: FontWeight.bold,
                       ),
@@ -84,7 +84,7 @@ class ProductDetailScreen extends StatelessWidget {
                                   text: 'Size',
                                 ),
                                 CustomText(
-                                  text: model.size,
+                                  text: model!.size,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ],
@@ -110,7 +110,7 @@ class ProductDetailScreen extends StatelessWidget {
                                   width: 20,
                                   height: 20,
                                   decoration: BoxDecoration(
-                                    color: model.color,
+                                    color: model!.color,
                                     border: Border.all(
                                       width: 0.5,
                                       color: Colors.grey,
@@ -135,7 +135,7 @@ class ProductDetailScreen extends StatelessWidget {
                         height: 15,
                       ),
                       CustomText(
-                        text: model.description,
+                        text: model!.description,
                         height: 2.4,
                       ),
                     ],
@@ -156,7 +156,7 @@ class ProductDetailScreen extends StatelessWidget {
                         color: Colors.grey,
                       ),
                       CustomText(
-                        text: '\$${model.price}',
+                        text: '\$${model!.price}',
                         color: primaryColor,
                         fontSize: 18.0,
                         fontWeight: FontWeight.bold,
@@ -172,10 +172,10 @@ class ProductDetailScreen extends StatelessWidget {
                         text: 'ADD',
                         onPressed: ()=>controller.addProduct(
                           CartProductModel(
-                            name: model.name,
-                            image: model.image,
-                            price: model.price,
-                            productId: model.productId,
+                            name: model!.name,
+                            image: model!.image,
+                            price: model!.price,
+                            productId: model!.productId,
                             quantity: 1,
                           ),
                         ),

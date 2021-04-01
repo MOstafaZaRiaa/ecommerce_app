@@ -64,7 +64,7 @@ class CartScreen extends StatelessWidget {
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
                                     image: FirebaseImage(
-                                      controller.cartProductModel[index].image,
+                                      controller.cartProductModel[index].image!,
                                     ),
                                   ),
                                   borderRadius: BorderRadius.only(

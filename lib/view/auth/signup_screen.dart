@@ -91,9 +91,9 @@ class SignUpScreen extends GetView<AuthViewModel> {
                 CustomButton(
                   text: 'SIGN UP',
                   onPressed: (){
-                    Get.focusScope.unfocus();
-                    if(_formkey.currentState.validate()){
-                      _formkey.currentState.save();
+                    Get.focusScope!.unfocus();
+                    if(_formkey.currentState!.validate()){
+                      _formkey.currentState!.save();
                       controller.createUserWithEmailAndPassword();
                     }
 

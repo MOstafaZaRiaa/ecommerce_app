@@ -1,9 +1,9 @@
 import 'package:ecommerce_app/model/cart_product_model.dart';
 
 class OrderModel {
-  String userId, timeDate;
-  Address address;
-  List<CartProductModel> products;
+  String? userId, timeDate;
+  Address? address;
+  List<CartProductModel>? products;
 
   OrderModel({
     this.userId,
@@ -32,7 +32,7 @@ class OrderModel {
 }
 
 class Address {
-  String street1, street2, city, state, country;
+  String? street1, street2, city, state, country;
 
   Address({
     this.street1,

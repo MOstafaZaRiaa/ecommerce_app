@@ -13,7 +13,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeViewModel>(
-      init: Get.find(),
+      init: HomeViewModel(),
       builder: (controller) => RefreshIndicator(
         onRefresh: () {
           return HomeViewModel().getProducts();
@@ -107,7 +107,7 @@ class HomePage extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: Image(
                       image: FirebaseImage(
-                        controller.categories[index].image,
+                        controller.categories[index].image!,
                       ),
                     ),
                   ),
@@ -152,7 +152,7 @@ class HomePage extends StatelessWidget {
                       width: MediaQuery.of(context).size.width * .4,
                       child: Image(
                         image: FirebaseImage(
-                          controller.products[index].image,
+                          controller.products[index].image!,
                         ),
                       ),
                     ),

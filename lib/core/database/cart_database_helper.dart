@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -10,16 +12,16 @@ class CartDatabaseHelper {
 
   static final CartDatabaseHelper db = CartDatabaseHelper._();
 
-  static Database _database;
+  static Database? _database;
 
-  Future<Database> get database async {
+  Future<Database?> get database async {
     if (_database != null) return _database;
     _database = await initDb();
     return _database;
   }
 
   initDb() async {
-    String path = join(await getDatabasesPath(), 'CartDatabase.db');
+    String? path = join(await getDatabasesPath(), 'CartDatabase.db');
     return await openDatabase(
       path,
       version: 1,
@@ -38,7 +40,7 @@ class CartDatabaseHelper {
 
   insert(CartProductModel model) async {
     var dbClient =await database;
-    await dbClient.insert(
+    await dbClient!.insert(
       tableCartProduct,
       model.toJson(),
       conflictAlgorithm: ConflictAlgorithm.replace,
@@ -47,7 +49,7 @@ class CartDatabaseHelper {
 
   Future<List<CartProductModel>> getAllProduct()async{
     var dbClient =await database;
-    List<Map> maps = await dbClient.query(tableCartProduct);
+    List<Map> maps = await dbClient!.query(tableCartProduct);
     List<CartProductModel> list = maps.isEmpty
         ? [] : maps
         .map((product) => CartProductModel.fromJson(product))
@@ -57,8 +59,8 @@ class CartDatabaseHelper {
   }
 
   updateProduct(CartProductModel model)async{
-    var dbClient =await database;
-    dbClient.update(tableCartProduct, model.toJson(),where: '$columnProductId = ?',whereArgs: [model.productId]);
+    var dbClient =await database ;
+    dbClient!.update(tableCartProduct, model.toJson(),where: '$columnProductId = ?',whereArgs: [model.productId]);
 
   }
 

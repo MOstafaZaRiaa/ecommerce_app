@@ -41,11 +41,11 @@ class ProfileScreen extends StatelessWidget {
                         Column(
                           children: [
                             CustomText(
-                              text: controller.userModel.name,
+                              text: controller.userModel!.name,
                               fontSize: 20.0,
                             ),
                             CustomText(
-                              text: controller.userModel.email,
+                              text: controller.userModel!.email,
                             ),
                           ],
                         ),
@@ -102,17 +102,17 @@ class ProfileScreen extends StatelessWidget {
 }
 
 class MenuListTile extends StatelessWidget {
-  final String iconPath;
-  final String tileText;
-  final Function onPressed;
+  final String? iconPath;
+  final String? tileText;
+  final Function? onPressed;
 
   const MenuListTile({this.iconPath, this.tileText, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: onPressed,
-      leading: Image.asset(iconPath),
+      onTap: onPressed as void Function()?,
+      leading: Image.asset(iconPath!),
       title: CustomText(
         text: tileText,
       ),

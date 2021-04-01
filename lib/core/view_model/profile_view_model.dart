@@ -9,8 +9,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:ecommerce_app/helper/local_storage_data.dart';
 
 class ProfileViewModel extends GetxController {
-  UserModel _userModel;
-  UserModel get userModel => _userModel;
+  UserModel? _userModel;
+  UserModel? get userModel => _userModel;
 
   ValueNotifier _loading = ValueNotifier(false);
   ValueNotifier get loading =>_loading;

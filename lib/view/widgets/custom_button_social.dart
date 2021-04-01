@@ -5,7 +5,7 @@ import 'custom_text.dart';
 class CustomButtonSocial extends StatelessWidget {
   final imagePath;
   final text;
-  final Function onPressed;
+  final Function? onPressed;
 
   const CustomButtonSocial({this.imagePath,this.onPressed, this.text,});
   @override
@@ -17,7 +17,7 @@ class CustomButtonSocial extends StatelessWidget {
         color: Colors.grey.shade50,
       ),
       child: FlatButton(
-        onPressed:onPressed,
+        onPressed:onPressed as void Function()?,
         shape: new RoundedRectangleBorder(
           borderRadius: new BorderRadius.circular(6.0),
         ),

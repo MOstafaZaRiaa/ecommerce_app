@@ -7,7 +7,7 @@ import '../constance.dart';
 import 'package:ecommerce_app/model/user_model.dart';
 
 class LocalStorageData extends GetxController {
-  Future<UserModel> get getUser async {
+  Future<UserModel?> get getUser async {
     try {
       UserModel userModel = await getUserData();
       if (userModel == null) {
@@ -22,7 +22,7 @@ class LocalStorageData extends GetxController {
 
   getUserData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    var data = prefs.getString(CACHED_USER_DATA);
+    var data = prefs.getString(CACHED_USER_DATA)!;
     return UserModel.fromJson(jsonDecode(data));
   }
 

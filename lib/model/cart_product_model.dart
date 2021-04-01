@@ -1,6 +1,6 @@
 class CartProductModel {
-  String name, price, image,productId;
-  int quantity;
+  String? name, price, image,productId;
+  int? quantity;
 
   CartProductModel({
     this.name,

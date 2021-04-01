@@ -35,7 +35,7 @@ class Summary extends StatelessWidget {
                               width: MediaQuery.of(context).size.width * .4,
                               child: Image(
                                 image: FirebaseImage(
-                                  controller.cartProductModel[index].image,
+                                  controller.cartProductModel[index].image!,
                                 ),
                                 fit: BoxFit.cover,
                               ),

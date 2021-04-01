@@ -17,7 +17,7 @@ class CheckOutViewModel extends GetxController {
 
   GlobalKey<FormState> formState = GlobalKey();
 
-  String street1, street2, city, state, country;
+  late String street1, street2, city, state, country;
 
   changeIndex(int i) {
     if(i==0||i<0){
@@ -28,8 +28,8 @@ class CheckOutViewModel extends GetxController {
       _index = i;
       _pages = Pages.AddAddress;
     } else if (i == 2) {
-      formState.currentState.save();
-      if(formState.currentState.validate()){
+      formState.currentState!.save();
+      if(formState.currentState!.validate()){
         _index = i;
         _pages = Pages.Summary;
       }

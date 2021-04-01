@@ -96,9 +96,9 @@ class LoginScreen extends GetView<AuthViewModel> {
                 CustomButton(
                   text: 'SIGN IN',
                   onPressed: (){
-                    Get.focusScope.unfocus();
-                    if(_formkey.currentState.validate()){
-                      _formkey.currentState.save();
+                    Get.focusScope!.unfocus();
+                    if(_formkey.currentState!.validate()){
+                      _formkey.currentState!.save();
                     }
                     controller.signInWithEmailAndPassword();
                   },

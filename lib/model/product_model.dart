@@ -3,8 +3,8 @@ import 'dart:ui';
 import 'package:ecommerce_app/helper/color_extension.dart';
 
 class ProductModel {
-  String name, price, size, description,productId, image;
-  Color color;
+  String? name, price, size, description,productId, image;
+  Color? color;
 
   ProductModel({
     this.name,
@@ -15,7 +15,7 @@ class ProductModel {
     this.color,
     this.productId,
   });
-  ProductModel.fromJson(Map<dynamic,dynamic>map){
+  ProductModel.fromJson(Map<dynamic,dynamic>?map){
     if(map == null){
       return;
     }

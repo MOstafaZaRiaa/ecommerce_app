@@ -1,7 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_facebook_login/flutter_facebook_login.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -13,9 +15,9 @@ import 'package:ecommerce_app/model/user_model.dart';
 
 class AuthViewModel extends GetxController {
   GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
-  FacebookLogin _facebookLogin = FacebookLogin();
+  FacebookAuth _facebookLogin = FacebookAuth.instance;
   FirebaseAuth _auth = FirebaseAuth.instance;
-  String email, password, name;
+  String? email, password, name;
 
   LocalStorageData localStorageData = Get.find();
 
@@ -40,7 +42,7 @@ class AuthViewModel extends GetxController {
   }
 
   void googleSignInMethod() async {
-    GoogleSignInAccount googleUser = await _googleSignIn.signIn();
+    GoogleSignInAccount googleUser = (await _googleSignIn.signIn())!;
     GoogleSignInAuthentication googleSignInAuthentication =
         await googleUser.authentication;
     final AuthCredential authCredential = GoogleAuthProvider.credential(
@@ -56,11 +58,9 @@ class AuthViewModel extends GetxController {
   }
 
   void facebookSignInMethod() async {
-    FacebookLoginResult facebookLoginResult =
-        await _facebookLogin.logIn(['email']);
-    final accessToken = facebookLoginResult.accessToken.token;
-    if (facebookLoginResult.status == FacebookLoginStatus.loggedIn) {
-      final facebookCredential = FacebookAuthProvider.credential(accessToken);
+    final result = await FacebookAuth.instance.login();
+    final OAuthCredential facebookCredential = FacebookAuthProvider.credential(result.accessToken!.token);
+    if (result.status == LoginStatus.success) {
       await _auth
           .signInWithCredential(facebookCredential)
           .then((userCredential) async {
@@ -74,10 +74,10 @@ class AuthViewModel extends GetxController {
     try {
       await _auth
           .signInWithEmailAndPassword(
-              email: email.trim(), password: password.trim())
+              email: email!.trim(), password: password!.trim())
           .then((value) async {
         await FireStoreUser()
-            .getCurrentUser(_auth.currentUser.uid)
+            .getCurrentUser(_auth.currentUser!.uid)
             .then((value) {
               setUser(UserModel.fromJson(value.data(),),);
         });
@@ -86,7 +86,7 @@ class AuthViewModel extends GetxController {
     } on FirebaseException catch (error) {
       Get.snackbar(
         'Login error',
-        error.message,
+        error.message!,
         colorText: Colors.white,
         backgroundColor: Colors.red,
         snackPosition: SnackPosition.BOTTOM,
@@ -98,15 +98,15 @@ class AuthViewModel extends GetxController {
     try {
       await _auth
           .createUserWithEmailAndPassword(
-        email: email.trim(),
-        password: password.trim(),
+        email: email!.trim(),
+        password: password!.trim(),
       )
           .then((userCredential) async {
         await FireStoreUser().addUserToFireStore(
           UserModel(
-            userId: userCredential.user.uid,
-            name: name == null ? userCredential.user.displayName : name,
-            email: userCredential.user.email,
+            userId: userCredential.user!.uid,
+            name: name == null ? userCredential.user!.displayName : name,
+            email: userCredential.user!.email,
             userPic: '',
           ),
         );
@@ -116,7 +116,7 @@ class AuthViewModel extends GetxController {
     } on FirebaseException catch (error) {
       Get.snackbar(
         'SignUp Error',
-        error.message,
+        error.message!,
         colorText: Colors.white,
         backgroundColor: Colors.red,
         snackPosition: SnackPosition.BOTTOM,
@@ -126,9 +126,9 @@ class AuthViewModel extends GetxController {
 
   Future<void> saveUser(UserCredential userCredential) async {
     UserModel userModel = UserModel(
-      userId: userCredential.user.uid,
-      name: name == null ? userCredential.user.displayName : name,
-      email: userCredential.user.email,
+      userId: userCredential.user!.uid,
+      name: name == null ? userCredential.user!.displayName : name,
+      email: userCredential.user!.email,
       userPic: '',
     );
     await FireStoreUser().addUserToFireStore(

@@ -7,7 +7,7 @@ class CustomButton extends StatelessWidget {
   final  text;
   final Color color;
   final Color textColor;
-  final Function onPressed;
+  final Function? onPressed;
 
   const CustomButton({
     this.text,
@@ -19,7 +19,7 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FlatButton(
-      onPressed: onPressed,
+      onPressed: onPressed as void Function()?,
       color: color,
       shape:  RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(6),

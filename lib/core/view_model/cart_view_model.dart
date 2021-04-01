@@ -43,29 +43,31 @@ class CartViewModel extends GetxController {
     await dbHelper.insert(cartProductModel);
     _cartProductModel.add(cartProductModel);
     _totalPrice +=
-        (double.parse(cartProductModel.price) * cartProductModel.quantity);
+        (double.parse(cartProductModel.price!) * cartProductModel.quantity!);
     update();
   }
 
   getTotalPrice() {
     for (int i = 0; i < _cartProductModel.length; i++) {
-      _totalPrice += (double.parse(cartProductModel[i].price) *
-          cartProductModel[i].quantity);
+      _totalPrice += (double.parse(cartProductModel[i].price!) *
+          cartProductModel[i].quantity!);
     }
     update();
   }
 
-  increaseQuantity(int index)async {
-    cartProductModel[index].quantity++;
-    _totalPrice += (double.parse(cartProductModel[index].price));
+  increaseQuantity(int index) async {
+    cartProductModel[index].quantity = cartProductModel[index].quantity! + 1;
+    _totalPrice += (double.parse(cartProductModel[index].price!));
     await dbHelper.updateProduct(cartProductModel[index]);
     update();
   }
 
-  decreaseQuantity(int index)async {
-    cartProductModel[index].quantity--;
-    _totalPrice -= (double.parse(cartProductModel[index].price));
-    await dbHelper.updateProduct(cartProductModel[index]);
+  decreaseQuantity(int index) async {
+    if (cartProductModel[index].quantity! > 1) {
+      cartProductModel[index].quantity = cartProductModel[index].quantity! - 1;
+      _totalPrice -= (double.parse(cartProductModel[index].price!));
+      await dbHelper.updateProduct(cartProductModel[index]);
+    }
     update();
   }
 }

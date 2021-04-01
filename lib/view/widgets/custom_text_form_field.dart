@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:ecommerce_app/view/widgets/custom_text.dart';
 
 class CustomTextFormField extends StatelessWidget {
-  final String text;
-  final String hintText;
+  final String? text;
+  final String? hintText;
   final bool obscureText;
-  final Function onSave;
-  final Function onValidate;
+  final Function? onSave;
+  final Function? onValidate;
 
   const CustomTextFormField({
     this.text,
@@ -27,8 +27,8 @@ class CustomTextFormField extends StatelessWidget {
           color: Colors.grey,
         ),
         TextFormField(
-          validator: onValidate,
-          onSaved: onSave,
+          validator: onValidate as String? Function(String?)?,
+          onSaved: onSave as void Function(String?)?,
           textInputAction: TextInputAction.next,
           obscureText: obscureText,
           decoration: InputDecoration(
