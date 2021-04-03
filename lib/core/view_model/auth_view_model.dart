@@ -55,6 +55,7 @@ class AuthViewModel extends GetxController {
       saveUser(userCredential);
     });
     Get.offAll(ControlViewModel());
+    update();
   }
 
   void facebookSignInMethod() async {
@@ -68,6 +69,7 @@ class AuthViewModel extends GetxController {
       });
     }
     Get.offAll(()=>ControlViewModel());
+    update();
   }
 
   void signInWithEmailAndPassword() async {
@@ -92,6 +94,7 @@ class AuthViewModel extends GetxController {
         snackPosition: SnackPosition.BOTTOM,
       );
     }
+    update();
   }
 
   void createUserWithEmailAndPassword() async {
@@ -122,6 +125,7 @@ class AuthViewModel extends GetxController {
         snackPosition: SnackPosition.BOTTOM,
       );
     }
+    update();
   }
 
   Future<void> saveUser(UserCredential userCredential) async {
@@ -136,10 +140,11 @@ class AuthViewModel extends GetxController {
     ).then((value) => {
        setUser(userModel)
     });
-    // setUser(userModel);
+    update();
   }
 
   setUser(UserModel userModel) async {
    await localStorageData.setUser(userModel);
+   update();
   }
 }

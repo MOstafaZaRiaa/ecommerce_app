@@ -1,4 +1,5 @@
-import 'package:flutter/foundation.dart';
+import 'package:ecommerce_app/constance.dart';
+import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
@@ -32,10 +33,15 @@ class CartViewModel extends GetxController {
     update();
   }
 
-  addProduct(CartProductModel cartProductModel) async {
+  addProduct(CartProductModel cartProductModel,BuildContext context) async {
     for (int i = 0; i < _cartProductModel.length; i++) {
       if (_cartProductModel[i].productId == cartProductModel.productId) {
-        return;
+        return ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Already in the cart.'),
+            backgroundColor: primaryColor,
+          ),
+        );
       }
     }
     var dbHelper = CartDatabaseHelper.db;
@@ -43,6 +49,27 @@ class CartViewModel extends GetxController {
     _cartProductModel.add(cartProductModel);
     _totalPrice +=
         (double.parse(cartProductModel.price!) * cartProductModel.quantity!);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Added to cart.'),
+        backgroundColor: primaryColor,
+      ),
+    );
+    update();
+  }
+
+  deleteProduct(CartProductModel cartProductModel, BuildContext context) async {
+    var dbHelper = CartDatabaseHelper.db;
+    await dbHelper.deleteProduct(cartProductModel);
+    _cartProductModel.remove(cartProductModel);
+    _totalPrice +=
+        (double.parse(cartProductModel.price!) * cartProductModel.quantity!);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Deleted.'),
+        backgroundColor: primaryColor,
+      ),
+    );
     update();
   }
 

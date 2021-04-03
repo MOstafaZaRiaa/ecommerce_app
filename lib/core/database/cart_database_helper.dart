@@ -6,7 +6,6 @@ import 'package:sqflite/sqflite.dart';
 import '../../constance.dart';
 import 'package:ecommerce_app/model/cart_product_model.dart';
 
-
 class CartDatabaseHelper {
   CartDatabaseHelper._();
 
@@ -39,7 +38,7 @@ class CartDatabaseHelper {
   }
 
   insert(CartProductModel model) async {
-    var dbClient =await database;
+    var dbClient = await database;
     await dbClient!.insert(
       tableCartProduct,
       model.toJson(),
@@ -47,21 +46,24 @@ class CartDatabaseHelper {
     );
   }
 
-  Future<List<CartProductModel>> getAllProduct()async{
-    var dbClient =await database;
+  Future<List<CartProductModel>> getAllProduct() async {
+    var dbClient = await database;
     List<Map> maps = await dbClient!.query(tableCartProduct);
     List<CartProductModel> list = maps.isEmpty
-        ? [] : maps
-        .map((product) => CartProductModel.fromJson(product))
-        .toList()
-    ;
+        ? []
+        : maps.map((product) => CartProductModel.fromJson(product)).toList();
     return list;
   }
 
-  updateProduct(CartProductModel model)async{
-    var dbClient =await database ;
-    dbClient!.update(tableCartProduct, model.toJson(),where: '$columnProductId = ?',whereArgs: [model.productId]);
-
+  updateProduct(CartProductModel model) async {
+    var dbClient = await database;
+    dbClient!.update(tableCartProduct, model.toJson(),
+        where: '$columnProductId = ?', whereArgs: [model.productId]);
   }
 
+  deleteProduct(CartProductModel model) async {
+    var dbClient = await database;
+    dbClient!.delete(tableCartProduct,
+        where: '$columnProductId = ?', whereArgs: [model.productId]);
+  }
 }

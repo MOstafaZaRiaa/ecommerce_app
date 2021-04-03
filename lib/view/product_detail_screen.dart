@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import 'package:firebase_image/firebase_image.dart';
@@ -9,7 +8,8 @@ import 'package:ecommerce_app/core/view_model/cart_view_model.dart';
 import 'package:ecommerce_app/model/cart_product_model.dart';
 import 'package:ecommerce_app/model/product_model.dart';
 import 'package:ecommerce_app/view/widgets/custom_button.dart';
-import 'package:ecommerce_app/view/widgets/custom_text.dart';
+import 'package:ecommerce_app/view/control_view.dart';
+import 'widgets/custom_text.dart';
 
 class ProductDetailScreen extends StatelessWidget {
   @override
@@ -39,7 +39,7 @@ class ProductDetailScreen extends StatelessWidget {
                   child: IconButton(
                     icon: Icon(Icons.arrow_back_ios),
                     onPressed: () {
-                      Get.back();
+                      Get.offAll(()=>ControlView(),);
                     },
                   ),
                 ),
@@ -178,6 +178,7 @@ class ProductDetailScreen extends StatelessWidget {
                             productId: model!.productId,
                             quantity: 1,
                           ),
+                          context,
                         ),
                       ),
                     ),
