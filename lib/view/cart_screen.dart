@@ -17,21 +17,22 @@ class CartScreen extends StatelessWidget {
       builder: (controller) => controller.cartProductModel.length == 0
           ? Center(
               child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  SvgPicture.asset(
-                    'assets/images/empty_cart.svg',
-                  ),
-                  CustomText(
-                    text: 'Cart empty!',
-                    fontSize: 32.0,
-                    alignment: Alignment.center,
-                  ),
-                ],
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SvgPicture.asset(
+                      'assets/images/empty_cart.svg',
+                    ),
+                    CustomText(
+                      text: 'Cart empty!',
+                      fontSize: 32.0,
+                      alignment: Alignment.center,
+                    ),
+                  ],
+                ),
               ),
-            ))
+            )
           : Scaffold(
               body: Column(
                 children: [
@@ -52,7 +53,7 @@ class CartScreen extends StatelessWidget {
                           key: Key(
                             controller.cartProductModel[index].productId!,
                           ),
-                          onDismissed:(dismissDirection){
+                          onDismissed: (dismissDirection) {
                             controller.deleteProduct(
                                 controller.cartProductModel[index], context);
                           },

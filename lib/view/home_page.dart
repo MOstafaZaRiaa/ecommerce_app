@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/view/category_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -83,6 +84,25 @@ class HomePage extends StatelessWidget {
     );
   }
 
+  Container _searchTextFormField() {
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: Colors.grey.shade100,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: TextFormField(
+        decoration: InputDecoration(
+          prefixIcon: Icon(
+            Icons.search_sharp,
+            color: Colors.black,
+          ),
+          border: InputBorder.none,
+        ),
+      ),
+    );
+  }
+
   Widget _categoriesListView() {
     return GetBuilder<HomeViewModel>(
       builder: (controller) => Container(
@@ -96,17 +116,22 @@ class HomePage extends StatelessWidget {
           itemBuilder: (context, index) {
             return Column(
               children: [
-                Container(
-                  height: 60,
-                  width: MediaQuery.of(context).size.width / 6.3,
-                  decoration: BoxDecoration(
-                      color: Colors.grey.shade100,
-                      borderRadius: BorderRadius.circular(10)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Image(
-                      image: NetworkImage(
-                        controller.categories[index].image!,
+                InkWell(
+                  onTap: (){
+                    Get.to(()=>CategoryScreen(title: controller.categories[index].name,));
+                  },
+                  child: Container(
+                    height: 60,
+                    width: MediaQuery.of(context).size.width / 6.3,
+                    decoration: BoxDecoration(
+                        color: Colors.grey.shade100,
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Image(
+                        image: NetworkImage(
+                          controller.categories[index].image!,
+                        ),
                       ),
                     ),
                   ),
@@ -186,25 +211,6 @@ class HomePage extends StatelessWidget {
               ),
             );
           },
-        ),
-      ),
-    );
-  }
-
-  Container _searchTextFormField() {
-    return Container(
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: Colors.grey.shade100,
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: TextFormField(
-        decoration: InputDecoration(
-          prefixIcon: Icon(
-            Icons.search_sharp,
-            color: Colors.black,
-          ),
-          border: InputBorder.none,
         ),
       ),
     );
