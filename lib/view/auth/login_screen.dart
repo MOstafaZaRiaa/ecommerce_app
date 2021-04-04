@@ -100,7 +100,7 @@ class LoginScreen extends GetView<AuthViewModel> {
                     if(_formkey.currentState!.validate()){
                       _formkey.currentState!.save();
                     }
-                    controller.signInWithEmailAndPassword();
+                    controller.signInWithEmailAndPassword(context);
                   },
                 ),
                 SizedBox(
@@ -117,7 +117,7 @@ class LoginScreen extends GetView<AuthViewModel> {
                   imagePath: 'assets/images/Facebook.png',
                   text: 'Sign In with Facebook',
                   onPressed: (){
-                    controller.facebookSignInMethod();
+                    controller.facebookSignInMethod(context);
                   },
                 ),
                 SizedBox(
@@ -127,7 +127,7 @@ class LoginScreen extends GetView<AuthViewModel> {
                   imagePath: 'assets/images/Google.png',
                   text: 'Sign In with Google',
                   onPressed: (){
-                    controller.googleSignInMethod();
+                    controller.googleSignInMethod(context);
                   },
                 ),
               ],

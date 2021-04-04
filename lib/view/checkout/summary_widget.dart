@@ -1,13 +1,12 @@
-import 'package:ecommerce_app/core/view_model/checkout_view_model.dart';
 import 'package:flutter/cupertino.dart';
 
-import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../constance.dart';
 import 'package:ecommerce_app/core/view_model/cart_view_model.dart';
 import 'package:ecommerce_app/view/widgets/custom_text.dart';
+import 'package:ecommerce_app/core/view_model/checkout_view_model.dart';
 
 class Summary extends StatelessWidget {
   @override
@@ -34,7 +33,7 @@ class Summary extends StatelessWidget {
                               height: 150,
                               width: MediaQuery.of(context).size.width * .4,
                               child: Image(
-                                image: FirebaseImage(
+                                image: NetworkImage(
                                   controller.cartProductModel[index].image!,
                                 ),
                                 fit: BoxFit.cover,

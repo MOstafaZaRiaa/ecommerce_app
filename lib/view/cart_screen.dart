@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/state_manager.dart';
-import 'package:firebase_image/firebase_image.dart';
 
 import '../constance.dart';
 import 'widgets/custom_button.dart';
@@ -84,7 +83,7 @@ class CartScreen extends StatelessWidget {
                                       MediaQuery.of(context).size.width * 0.35,
                                   decoration: BoxDecoration(
                                     image: DecorationImage(
-                                      image: FirebaseImage(
+                                      image: NetworkImage(
                                         controller
                                             .cartProductModel[index].image!,
                                       ),

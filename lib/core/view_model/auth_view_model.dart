@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:ecommerce_app/constance.dart';
 import 'package:flutter/material.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -11,7 +12,6 @@ import 'package:ecommerce_app/core/services/firestore_user.dart';
 import 'package:ecommerce_app/core/view_model/control_view_model.dart';
 import 'package:ecommerce_app/helper/local_storage_data.dart';
 import 'package:ecommerce_app/model/user_model.dart';
-
 
 class AuthViewModel extends GetxController {
   GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
@@ -41,7 +41,13 @@ class AuthViewModel extends GetxController {
     super.onClose();
   }
 
-  void googleSignInMethod() async {
+  void googleSignInMethod(BuildContext context) async {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Logging now....'),
+        backgroundColor: primaryColor,
+      ),
+    );
     GoogleSignInAccount googleUser = (await _googleSignIn.signIn())!;
     GoogleSignInAuthentication googleSignInAuthentication =
         await googleUser.authentication;
@@ -53,27 +59,52 @@ class AuthViewModel extends GetxController {
         .signInWithCredential(authCredential)
         .then((userCredential) async {
       saveUser(userCredential);
+      Get.offAll(ControlViewModel());
     });
-    Get.offAll(ControlViewModel());
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('There is an error ,Try again later.'),
+        backgroundColor: Colors.red,
+      ),
+    );
     update();
   }
 
-  void facebookSignInMethod() async {
+  void facebookSignInMethod(BuildContext context) async {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Logging now....'),
+        backgroundColor: primaryColor,
+      ),
+    );
     final result = await FacebookAuth.instance.login();
-    final OAuthCredential facebookCredential = FacebookAuthProvider.credential(result.accessToken!.token);
+    final OAuthCredential facebookCredential =
+        FacebookAuthProvider.credential(result.accessToken!.token);
     if (result.status == LoginStatus.success) {
       await _auth
           .signInWithCredential(facebookCredential)
           .then((userCredential) async {
-       await saveUser(userCredential);
+        await saveUser(userCredential);
       });
+      Get.offAll(() => ControlViewModel());
     }
-    Get.offAll(()=>ControlViewModel());
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(result.status.toString(),),
+        backgroundColor: Colors.red,
+      ),
+    );
     update();
   }
 
-  void signInWithEmailAndPassword() async {
+  void signInWithEmailAndPassword(BuildContext context) async {
     try {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Logging now....'),
+          backgroundColor: primaryColor,
+        ),
+      );
       await _auth
           .signInWithEmailAndPassword(
               email: email!.trim(), password: password!.trim())
@@ -81,24 +112,35 @@ class AuthViewModel extends GetxController {
         await FireStoreUser()
             .getCurrentUser(_auth.currentUser!.uid)
             .then((value) {
-              setUser(UserModel.fromJson(value.data(),),);
+          setUser(
+            UserModel.fromJson(
+              value.data(),
+            ),
+          );
         });
       });
-      Get.offAll(()=>ControlViewModel(),);
+      Get.offAll(
+        () => ControlViewModel(),
+      );
     } on FirebaseException catch (error) {
-      Get.snackbar(
-        'Login error',
-        error.message!,
-        colorText: Colors.white,
-        backgroundColor: Colors.red,
-        snackPosition: SnackPosition.BOTTOM,
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(error.toString(),),
+          backgroundColor: Colors.red,
+        ),
       );
     }
     update();
   }
 
-  void createUserWithEmailAndPassword() async {
+  void createUserWithEmailAndPassword(BuildContext context) async {
     try {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Signing Up now....'),
+          backgroundColor: primaryColor,
+        ),
+      );
       await _auth
           .createUserWithEmailAndPassword(
         email: email!.trim(),
@@ -115,14 +157,15 @@ class AuthViewModel extends GetxController {
         );
         // saveUser(userCredential);
       });
-      Get.offAll(()=>ControlViewModel(),);
+      Get.offAll(
+        () => ControlViewModel(),
+      );
     } on FirebaseException catch (error) {
-      Get.snackbar(
-        'SignUp Error',
-        error.message!,
-        colorText: Colors.white,
-        backgroundColor: Colors.red,
-        snackPosition: SnackPosition.BOTTOM,
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(error.toString(),),
+          backgroundColor: Colors.red,
+        ),
       );
     }
     update();
@@ -135,16 +178,16 @@ class AuthViewModel extends GetxController {
       email: userCredential.user!.email,
       userPic: '',
     );
-    await FireStoreUser().addUserToFireStore(
-      userModel,
-    ).then((value) => {
-       setUser(userModel)
-    });
+    await FireStoreUser()
+        .addUserToFireStore(
+          userModel,
+        )
+        .then((value) => {setUser(userModel)});
     update();
   }
 
   setUser(UserModel userModel) async {
-   await localStorageData.setUser(userModel);
-   update();
+    await localStorageData.setUser(userModel);
+    update();
   }
 }

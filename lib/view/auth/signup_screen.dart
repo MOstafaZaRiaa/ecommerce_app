@@ -94,7 +94,7 @@ class SignUpScreen extends GetView<AuthViewModel> {
                     Get.focusScope!.unfocus();
                     if(_formkey.currentState!.validate()){
                       _formkey.currentState!.save();
-                      controller.createUserWithEmailAndPassword();
+                      controller.createUserWithEmailAndPassword(context);
                     }
 
                   },

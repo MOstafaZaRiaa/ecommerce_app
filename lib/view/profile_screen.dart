@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:firebase_image/firebase_image.dart';
 
 import 'package:ecommerce_app/core/view_model/profile_view_model.dart';
 import 'package:ecommerce_app/view/widgets/custom_text.dart';

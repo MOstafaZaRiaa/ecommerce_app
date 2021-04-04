@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:firebase_image/firebase_image.dart';
 import 'package:get/get.dart';
 
 import 'package:ecommerce_app/constance.dart';
@@ -30,7 +29,7 @@ class ProductDetailScreen extends StatelessWidget {
                   width: double.infinity,
                   height: MediaQuery.of(context).size.height * 0.3,
                   child: Image(
-                    image: FirebaseImage(model!.image!),
+                    image: NetworkImage(model!.image!),
                     fit: BoxFit.cover,
                   ),
                 ),

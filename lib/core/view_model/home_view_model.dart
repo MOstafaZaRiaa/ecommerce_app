@@ -19,6 +19,7 @@ class HomeViewModel extends GetxController {
   HomeViewModel() {
     getCategory();
     getProducts();
+    update();
   }
 
   getCategory() async {

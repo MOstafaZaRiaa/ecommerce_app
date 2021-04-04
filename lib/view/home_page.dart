@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:firebase_image/firebase_image.dart';
 
 import '../constance.dart';
 import 'package:ecommerce_app/constance.dart';
@@ -106,7 +105,7 @@ class HomePage extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Image(
-                      image: FirebaseImage(
+                      image: NetworkImage(
                         controller.categories[index].image!,
                       ),
                     ),
@@ -151,7 +150,7 @@ class HomePage extends StatelessWidget {
                       height: 220,
                       width: MediaQuery.of(context).size.width * .4,
                       child: Image(
-                        image: FirebaseImage(
+                        image: NetworkImage(
                           controller.products[index].image!,
                         ),
                       ),
