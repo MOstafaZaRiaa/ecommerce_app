@@ -15,5 +15,9 @@ class HomeServices {
     var value = await _productsCollectionReference.get();
     return value.docs;
   }
+  Future<List<QueryDocumentSnapshot>> getProductsByCategory(String category) async {
+    var value = await _productsCollectionReference.where('category', isEqualTo: category).get();
+    return value.docs;
+  }
 
 }
