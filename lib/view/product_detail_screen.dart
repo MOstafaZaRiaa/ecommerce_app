@@ -38,7 +38,7 @@ class ProductDetailScreen extends StatelessWidget {
                   child: IconButton(
                     icon: Icon(Icons.arrow_back_ios),
                     onPressed: () {
-                      Get.offAll(()=>ControlView(),);
+                      Get.back();
                     },
                   ),
                 ),
