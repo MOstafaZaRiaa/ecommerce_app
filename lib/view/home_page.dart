@@ -9,6 +9,8 @@ import 'package:ecommerce_app/core/view_model/home_view_model.dart';
 import 'package:ecommerce_app/view/product_detail_screen.dart';
 import 'package:ecommerce_app/view/widgets/custom_text.dart';
 
+import 'best_selling_screen.dart';
+
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -62,7 +64,7 @@ class HomePage extends StatelessWidget {
                             InkWell(
                               onTap: () {
                                 //TODO:see all button
-                                controller.getCategory();
+                                Get.to(()=>BestSellingScreen(products: controller.products,));
                               },
                               child: CustomText(
                                 text: 'See all',

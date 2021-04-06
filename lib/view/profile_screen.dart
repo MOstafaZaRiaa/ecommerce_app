@@ -54,42 +54,44 @@ class ProfileScreen extends StatelessWidget {
                       height: 70,
                     ),
                     Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          MenuListTile(
-                            iconPath: 'assets/menu_icons/Icon_Edit-Profile.png',
-                            tileText: 'Edit Profile',
-                            onPressed: () {},
-                          ),
-                          MenuListTile(
-                            iconPath: 'assets/menu_icons/Icon_Location.png',
-                            tileText: 'Shipping Address',
-                            onPressed: () {},
-                          ),
-                          MenuListTile(
-                            iconPath: 'assets/menu_icons/Icon_History.png',
-                            tileText: 'Order History',
-                            onPressed: () {},
-                          ),
-                          MenuListTile(
-                            iconPath: 'assets/menu_icons/Icon_Payment.png',
-                            tileText: 'Cards',
-                            onPressed: () {},
-                          ),
-                          MenuListTile(
-                            iconPath: 'assets/menu_icons/Icon_Alert.png',
-                            tileText: 'Notifications',
-                            onPressed: () {},
-                          ),
-                          MenuListTile(
-                            iconPath: 'assets/menu_icons/Icon_Exit.png',
-                            tileText: 'Log Out',
-                            onPressed: () {
-                              controller.signOutOffAll();
-                            },
-                          ),
-                        ],
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            MenuListTile(
+                              iconPath: 'assets/menu_icons/Icon_Edit-Profile.png',
+                              tileText: 'Edit Profile',
+                              onPressed: () {},
+                            ),
+                            MenuListTile(
+                              iconPath: 'assets/menu_icons/Icon_Location.png',
+                              tileText: 'Shipping Address',
+                              onPressed: () {},
+                            ),
+                            MenuListTile(
+                              iconPath: 'assets/menu_icons/Icon_History.png',
+                              tileText: 'Order History',
+                              onPressed: () {},
+                            ),
+                            MenuListTile(
+                              iconPath: 'assets/menu_icons/Icon_Payment.png',
+                              tileText: 'Cards',
+                              onPressed: () {},
+                            ),
+                            MenuListTile(
+                              iconPath: 'assets/menu_icons/Icon_Alert.png',
+                              tileText: 'Notifications',
+                              onPressed: () {},
+                            ),
+                            MenuListTile(
+                              iconPath: 'assets/menu_icons/Icon_Exit.png',
+                              tileText: 'Log Out',
+                              onPressed: () {
+                                controller.signOutOffAll();
+                              },
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],
@@ -109,13 +111,16 @@ class MenuListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      onTap: onPressed as void Function()?,
-      leading: Image.asset(iconPath!),
-      title: CustomText(
-        text: tileText,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ListTile(
+        onTap: onPressed as void Function()?,
+        leading: Image.asset(iconPath!),
+        title: CustomText(
+          text: tileText,
+        ),
+        trailing: Icon(Icons.navigate_next_rounded),
       ),
-      trailing: Icon(Icons.navigate_next_rounded),
     );
   }
 }

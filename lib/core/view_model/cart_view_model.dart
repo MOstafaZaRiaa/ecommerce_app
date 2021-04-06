@@ -62,7 +62,7 @@ class CartViewModel extends GetxController {
     var dbHelper = CartDatabaseHelper.db;
     await dbHelper.deleteProduct(cartProductModel);
     _cartProductModel.remove(cartProductModel);
-    _totalPrice +=
+    _totalPrice -=
         (double.parse(cartProductModel.price!) * cartProductModel.quantity!);
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(

@@ -10,7 +10,6 @@ import 'package:ecommerce_app/view/widgets/custom_text.dart';
 class CategoryScreen extends StatelessWidget {
   final String? title;
 
-
   const CategoryScreen({this.title,});
 
   Widget build(BuildContext context) {
@@ -54,7 +53,8 @@ class CategoryScreen extends StatelessWidget {
                     itemCount: products.length,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
-                      childAspectRatio: 1 / 1.65,
+                      childAspectRatio:MediaQuery.of(context).size.width /
+                      (MediaQuery.of(context).size.height/0.9),
                     ),
                     itemBuilder: (context, index) {
                       return InkWell(
