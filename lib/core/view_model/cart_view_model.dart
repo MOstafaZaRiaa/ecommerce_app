@@ -28,8 +28,8 @@ class CartViewModel extends GetxController {
   getAllProduct() async {
     _isLoading.value = true;
     _cartProductModel = await dbHelper.getAllProduct();
-    _isLoading.value = false;
     getTotalPrice();
+    _isLoading.value = false;
     update();
   }
 

@@ -1,11 +1,11 @@
-import 'package:ecommerce_app/model/product_model.dart';
-import 'package:ecommerce_app/view/product_detail_screen.dart';
-import 'package:ecommerce_app/view/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
 import '../constance.dart';
+import 'package:ecommerce_app/model/product_model.dart';
+import 'package:ecommerce_app/view/product_detail_screen.dart';
+import 'package:ecommerce_app/view/widgets/custom_text.dart';
 
 class BestSellingScreen extends StatelessWidget {
   @override
@@ -14,31 +14,28 @@ class BestSellingScreen extends StatelessWidget {
   const BestSellingScreen({required this.products});
 
   Widget build(BuildContext context) {
-    final deviceWidth = Get.width;
     return Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios_outlined,color: Colors.black,),
+            onPressed: () {
+              Get.back();
+            },
+          ),
+          title: CustomText(
+            text: "Best Selling",
+            color: Colors.black,
+          ),
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          elevation: 0,
+
+        ),
         body: SafeArea(
       child: Column(
         children: [
           SizedBox(
             height: 10,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              IconButton(
-                icon: Icon(Icons.arrow_back_ios_outlined),
-                onPressed: () {
-                  Get.back();
-                },
-              ),
-              SizedBox(
-                width: deviceWidth * 0.3,
-              ),
-              CustomText(
-                text: 'Best Selling',
-                fontSize: 20.0,
-              ),
-            ],
           ),
           Expanded(
             child: GridView.builder(

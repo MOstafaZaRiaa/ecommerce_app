@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 import 'package:ecommerce_app/view/cart_screen.dart';
 import 'package:ecommerce_app/view/home_page.dart';
-import 'package:ecommerce_app/view/profile_screen.dart';
+import 'file:///C:/Users/zaria/OneDrive/Documents/GitHub/ecommerce_app/lib/view/profile_screen/profile_screen.dart';
 
 class ControlViewModel extends GetxController {
   int _navigatorValue = 0;

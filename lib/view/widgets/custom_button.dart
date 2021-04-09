@@ -4,7 +4,7 @@ import 'package:ecommerce_app/constance.dart';
 import 'package:ecommerce_app/view/widgets/custom_text.dart';
 
 class CustomButton extends StatelessWidget {
-  final  text;
+  final text;
   final Color color;
   final Color textColor;
   final Function? onPressed;
@@ -18,13 +18,17 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FlatButton(
-      onPressed: onPressed as void Function()?,
-      color: color,
-      shape:  RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(6),
+    return ElevatedButton(
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all(color),
+        shape: MaterialStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(6),
+          ),
+        ),
+        padding: MaterialStateProperty.all(const EdgeInsets.all(18),),
       ),
-      padding:const EdgeInsets.all(18),
+      onPressed: onPressed as void Function()?,
       child: CustomText(
         text: text,
         alignment: Alignment.center,

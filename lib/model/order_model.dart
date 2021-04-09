@@ -32,9 +32,11 @@ class OrderModel {
 }
 
 class Address {
-  String? street1, street2, city, state, country;
+  String? addressId,addressName,street1, street2, city, state, country;
 
   Address({
+    this.addressId,
+    this.addressName,
     this.street1,
     this.street2,
     this.city,
@@ -42,18 +44,23 @@ class Address {
     this.country,
   });
 
-  factory Address.fromMap(Map<String, dynamic> map) {
-    return new Address(
-      street1: map['street1'],
-      street2: map['street2'],
-      city: map['city'],
-      state: map['state'],
-      country: map['country'],
-    );
+  Address.fromJson(Map<dynamic, dynamic>? map) {
+    if (map == null) {
+      return;
+    }
+    addressId = map['addressId'];
+    addressName = map['addressName'];
+    street1 = map['street1'];
+    street2 = map['street2'];
+    city = map['city'];
+    state = map['state'];
+    country = map['country'];
   }
 
-  Map<String, dynamic> toMap() {
+  toJson() {
     return {
+      'addressId': this.addressId,
+      'addressName': this.addressName,
       'street1': this.street1,
       'street2': this.street2,
       'city': this.city,

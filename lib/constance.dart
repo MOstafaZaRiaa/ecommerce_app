@@ -11,6 +11,18 @@ final String columnQuantity = 'quantity';
 final String columnPrice = 'price';
 final String columnProductId = 'productId';
 
+final String tableAddressDatabase = 'addressDatabase';
+final String addressName = 'addressName';
+final String street1 = 'street1';
+final String street2 = 'street2';
+final String city = 'city';
+final String state = 'state';
+final String country = 'country';
+final String addressId = 'addressId';
+
+
+
+
 const CACHED_USER_DATA = 'user';
 
 

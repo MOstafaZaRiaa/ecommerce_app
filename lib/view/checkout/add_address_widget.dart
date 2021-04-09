@@ -1,9 +1,10 @@
-import 'package:ecommerce_app/core/view_model/cart_view_model.dart';
+import 'package:flutter/material.dart';
+
+import 'package:get/get.dart';
+
 import 'package:ecommerce_app/core/view_model/checkout_view_model.dart';
 import 'package:ecommerce_app/view/widgets/custom_text.dart';
 import 'package:ecommerce_app/view/widgets/custom_text_form_field.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class AddAddress extends StatelessWidget {
   @override

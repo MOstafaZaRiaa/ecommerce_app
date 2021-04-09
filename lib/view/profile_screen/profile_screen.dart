@@ -1,3 +1,4 @@
+import 'file:///C:/Users/zaria/OneDrive/Documents/GitHub/ecommerce_app/lib/view/profile_screen/shipping_address/shipping_address_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -66,7 +67,9 @@ class ProfileScreen extends StatelessWidget {
                             MenuListTile(
                               iconPath: 'assets/menu_icons/Icon_Location.png',
                               tileText: 'Shipping Address',
-                              onPressed: () {},
+                              onPressed: () {
+                                Get.to(ShippingAddressScreen());
+                              },
                             ),
                             MenuListTile(
                               iconPath: 'assets/menu_icons/Icon_History.png',

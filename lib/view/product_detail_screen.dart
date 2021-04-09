@@ -7,7 +7,6 @@ import 'package:ecommerce_app/core/view_model/cart_view_model.dart';
 import 'package:ecommerce_app/model/cart_product_model.dart';
 import 'package:ecommerce_app/model/product_model.dart';
 import 'package:ecommerce_app/view/widgets/custom_button.dart';
-import 'package:ecommerce_app/view/control_view.dart';
 import 'widgets/custom_text.dart';
 
 class ProductDetailScreen extends StatelessWidget {
