@@ -54,13 +54,7 @@ class AddressDatabaseHelper {
         : maps.map((address) => Address.fromJson(address)).toList();
     return list;
   }
-
-  updateAddress(Address address) async {
-    var dbClient = await database;
-    dbClient!.update(tableAddressDatabase, address.toJson(),
-        where: '$addressId = ?', whereArgs: [address.addressId]);
-  }
-
+  
   deleteAddress(Address address) async {
     var dbClient = await database;
     dbClient!.delete(tableAddressDatabase,

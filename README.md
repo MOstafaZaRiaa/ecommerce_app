@@ -1,9 +1,9 @@
-# E-Commerce Complate App - Flutter Firebase Using Get-x
+# E-Commerce Complete App - Flutter Firebase Using Get-x
 
 That is a complete e-commerce app.
 we show you how you can create a nice
-clean archetecture and clean design for your e-commerce app that can
-run both Andriod and iOS devices because it builds with flutter.
+clean architecture and clean design for your e-commerce app that can
+run both Android and iOS devices because it builds with flutter.
 
 
 ### Video Preview of Final UI

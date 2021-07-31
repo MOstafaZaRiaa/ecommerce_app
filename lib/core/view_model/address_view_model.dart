@@ -37,7 +37,7 @@ class AddressViewModel extends GetxController {
     update();
   }
 
-   generateRandomId() {
+  generateRandomId() {
     var random = Random.secure();
     var values = List<int>.generate(5, (i) =>  random.nextInt(255));
     addressId = base64UrlEncode(values);

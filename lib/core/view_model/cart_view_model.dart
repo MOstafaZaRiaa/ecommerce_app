@@ -8,11 +8,9 @@ import 'package:ecommerce_app/model/cart_product_model.dart';
 
 class CartViewModel extends GetxController {
   ValueNotifier<bool> _isLoading = ValueNotifier(false);
-
   ValueNotifier<bool> get isLoading => _isLoading;
 
   List<CartProductModel> _cartProductModel = [];
-
   List<CartProductModel> get cartProductModel => _cartProductModel;
 
   double _totalPrice = 0.0;
@@ -44,7 +42,6 @@ class CartViewModel extends GetxController {
         );
       }
     }
-    var dbHelper = CartDatabaseHelper.db;
     await dbHelper.insert(cartProductModel);
     _cartProductModel.add(cartProductModel);
     _totalPrice +=

@@ -55,12 +55,13 @@ class AuthViewModel extends GetxController {
       idToken: googleSignInAuthentication.idToken,
       accessToken: googleSignInAuthentication.accessToken,
     );
-    await _auth
-        .signInWithCredential(authCredential)
-        .then((userCredential) async {
-      saveUser(userCredential);
-      Get.offAll(ControlViewModel());
-    });
+    await _auth.signInWithCredential(authCredential).then(
+      (userCredential) async {
+        saveUser(userCredential);
+        Get.offAll(ControlViewModel());
+        update();
+      },
+    );
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('There is an error ,Try again later.'),
@@ -88,9 +89,12 @@ class AuthViewModel extends GetxController {
       });
       Get.offAll(() => ControlViewModel());
     }
+
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(result.status.toString(),),
+        content: Text(
+          result.status.toString(),
+        ),
         backgroundColor: Colors.red,
       ),
     );
@@ -114,7 +118,7 @@ class AuthViewModel extends GetxController {
             .then((value) {
           setUser(
             UserModel.fromJson(
-              value.data(),
+              value.data as Map<dynamic, dynamic>,
             ),
           );
         });
@@ -125,7 +129,9 @@ class AuthViewModel extends GetxController {
     } on FirebaseException catch (error) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(error.toString(),),
+          content: Text(
+            error.toString(),
+          ),
           backgroundColor: Colors.red,
         ),
       );
@@ -163,7 +169,9 @@ class AuthViewModel extends GetxController {
     } on FirebaseException catch (error) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(error.toString(),),
+          content: Text(
+            error.toString(),
+          ),
           backgroundColor: Colors.red,
         ),
       );
@@ -182,7 +190,11 @@ class AuthViewModel extends GetxController {
         .addUserToFireStore(
           userModel,
         )
-        .then((value) => {setUser(userModel)});
+        .then(
+          (value) => {
+            setUser(userModel),
+          },
+        );
     update();
   }
 

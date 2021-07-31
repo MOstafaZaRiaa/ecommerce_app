@@ -28,7 +28,7 @@ class HomeViewModel extends GetxController {
       categoriesDocs.forEach((document) {
         _categories.add(
           CategoryModel.fromJson(
-            document.data(),
+            document.data() as Map<dynamic, dynamic>,
           ),
         );
       });
@@ -42,7 +42,7 @@ class HomeViewModel extends GetxController {
       productsDocs.forEach((document) {
         _products.add(
           ProductModel.fromJson(
-            document.data(),
+            document.data() as Map<dynamic, dynamic>,
           ),
         );
       });

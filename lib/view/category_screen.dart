@@ -30,6 +30,7 @@ class CategoryScreen extends StatelessWidget {
         title: CustomText(
           text: title,
           color: Colors.black,
+          alignment: Alignment.center,
         ),
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,

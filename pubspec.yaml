@@ -17,19 +17,21 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
-  get:
-  flutter_native_splash:
-  introduction_screen:
-  firebase_core:
-  firebase_auth:
-  google_sign_in:
-  flutter_facebook_auth:
-  cloud_firestore:
-  sqflite:
-  path:
-  shared_preferences:
-  flutter_svg:
-  status_change:
+  get: ^4.3.0
+  flutter_native_splash: ^1.2.0
+  introduction_screen: ^2.1.0
+  firebase_core: ^1.4.0
+  firebase_auth: ^3.0.1
+  google_sign_in: ^5.0.5
+  flutter_facebook_auth: ^3.5.0
+  firebase_storage: ^10.0.1
+  cloud_firestore: ^2.4.0
+  sqflite: ^2.0.0+3
+  path: ^1.8.0
+  shared_preferences: ^2.0.6
+  flutter_svg: ^0.22.0
+  status_change: ^2.0.0
+  image_picker: ^0.8.2
 
 flutter_native_splash:
   color: "#42a5f5"
@@ -46,7 +48,7 @@ flutter:
   assets:
     - assets/images/
     - assets/menu_icons/
-    - assets/
+    - assets/location.gif
 
   # fonts:
   #   - family: Schyler

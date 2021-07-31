@@ -1,4 +1,5 @@
 import 'file:///C:/Users/zaria/OneDrive/Documents/GitHub/ecommerce_app/lib/view/profile_screen/shipping_address/shipping_address_screen.dart';
+import 'package:ecommerce_app/view/profile_screen/edit_profile_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -39,6 +40,7 @@ class ProfileScreen extends StatelessWidget {
                           width: 50,
                         ),
                         Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             CustomText(
                               text: controller.userModel!.name,
@@ -62,7 +64,9 @@ class ProfileScreen extends StatelessWidget {
                             MenuListTile(
                               iconPath: 'assets/menu_icons/Icon_Edit-Profile.png',
                               tileText: 'Edit Profile',
-                              onPressed: () {},
+                              onPressed: () {
+                                Get.to(()=>EditProfileScreen());
+                              },
                             ),
                             MenuListTile(
                               iconPath: 'assets/menu_icons/Icon_Location.png',

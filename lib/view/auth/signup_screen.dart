@@ -50,7 +50,7 @@ class SignUpScreen extends GetView<AuthViewModel> {
                   },
                   onValidate: (value){
                     if(value==null){
-                      print('zobbry');
+
                     }
                   },
                 ),
@@ -65,7 +65,7 @@ class SignUpScreen extends GetView<AuthViewModel> {
                   },
                   onValidate: (value){
                     if(value==null){
-                      print('zobbry');
+
                     }
                   },
                 ),
@@ -81,7 +81,7 @@ class SignUpScreen extends GetView<AuthViewModel> {
                   },
                   onValidate: (value){
                     if(value==null){
-                      print('zoppry');
+
                     }
                   },
                 ),
